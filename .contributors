@@ -1,0 +1,18 @@
+{
+  "projectName": "teamtemp",
+  "projectOwner": "Venkat narasimha",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "name": "venkata narasimha rao d",
+      "profile": "https://github.com/narasimhadvnr",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}
