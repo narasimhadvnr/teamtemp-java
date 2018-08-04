@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class InstanceRating {
+public class ThemeRating {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -28,9 +30,10 @@ public class InstanceRating {
 	
 	private String browserId;
 	
-	@ManyToOne(targetEntity= TeamInstance.class)
-	@JsonIgnore
-	private TeamInstance teamInstance;
+	@ManyToOne
+	private Theme theme;
+	
+	
 	public long getId() {
 		return id;
 	}
@@ -71,12 +74,12 @@ public class InstanceRating {
 		this.browserId = browserId;
 	}
 
-	public TeamInstance getTeamLink() {
-		return teamInstanceId;
+	public Theme getTheme() {
+		return theme;
 	}
 
-	public void setTeamLink(TeamInstance teamLink) {
-		this.teamInstanceId = teamLink;
+	public void setTheme(Theme teamLink) {
+		this.theme = teamLink;
 	}
 	
 	

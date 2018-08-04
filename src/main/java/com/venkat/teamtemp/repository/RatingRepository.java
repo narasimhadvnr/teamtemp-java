@@ -1,12 +1,12 @@
 package com.venkat.teamtemp.repository;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import com.venkat.teamtemp.model.InstanceRating;
+import com.venkat.teamtemp.model.ThemeRating;
 
-public interface RatingRepository extends JpaRepository<InstanceRating, Long>, CustomRatingRepository{
+public interface RatingRepository extends JpaRepository<ThemeRating, Long>, CustomRatingRepository{
 
-
+	List<ThemeRating> findByThemeId(long id);
 }

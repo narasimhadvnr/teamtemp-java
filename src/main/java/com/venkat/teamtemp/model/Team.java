@@ -23,7 +23,7 @@ public class Team {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	public long id;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String name;
 	
 	private String roleType;
@@ -34,7 +34,7 @@ public class Team {
 	private User creatorUser;
 	
 	@OneToMany(mappedBy="team")	
-	private List<TeamInstance> links;
+	private List<Theme> links;
 
 	public long getId() {
 		return id;
@@ -68,15 +68,15 @@ public class Team {
 		this.creatorUser = creatorUser;
 	}
 
-	public List<TeamInstance> getLinks() {
+	public List<Theme> getLinks() {
 		return links;
 	}
 
-	public void setLinks(List<TeamInstance> links) {
+	public void setLinks(List<Theme> links) {
 		this.links = links;
 	}
 	
-	public boolean addTeamLink(TeamInstance instance) {
+	public boolean addTeamLink(Theme instance) {
 		
 		if(this.links ==null || this.links.size() ==0) {
 			return false;
