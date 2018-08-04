@@ -9,15 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.venkat.teamtemp.model.RatingLink;
 import com.venkat.teamtemp.repository.RatingLinkRepository;
-import com.venkat.teamtemp.repository.TeamInstanceRepository;
+import java.util.List;
 
 @RestController
-@RequestMapping("/rating")
+@RequestMapping("/teams/{teamId}/ratingLink")
 public class RatingLinkController {
 
 	
 	@Autowired
 	RatingLinkRepository repository;
+
 	
 	@PostMapping
 	public boolean saveRating(@RequestBody RatingLink rating) {
@@ -25,5 +26,18 @@ public class RatingLinkController {
 		repository.save(rating);
 		return true;
 	}
+
+
+	@GetMapping
+	public List<RatingLink> getAllRatingLinks(){
+		return repository.findAll();
+	}
+
+
+	// @GetMapping("/rating/{linkName}")
+	// public List<RatingLink> getRating( @PathVariable("linkName") String linkName){
+	// 	return repository.findB
+	// }
+
 	
 }

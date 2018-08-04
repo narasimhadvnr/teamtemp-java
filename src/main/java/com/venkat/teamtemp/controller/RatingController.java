@@ -15,7 +15,7 @@ import com.venkat.teamtemp.repository.RatingRepository;
 import com.venkat.teamtemp.repository.TeamInstanceRepository;
 
 @RestController
-@RequestMapping("/rating")
+@RequestMapping("/ratings")
 public class RatingController {
 
 	

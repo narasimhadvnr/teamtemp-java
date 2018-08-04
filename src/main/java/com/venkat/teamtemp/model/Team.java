@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,11 +29,11 @@ public class Team {
 	private String roleType;
 	
 	@ManyToOne
-	@JoinColumn(name = "creator")
+	@JoinColumn(name = "creator",referencedColumnName="id")
+	@JsonIgnore
 	private User creatorUser;
 	
-	@OneToMany
-	@JoinColumn(name="id")
+	@OneToMany(mappedBy="team")	
 	private List<TeamInstance> links;
 
 	public long getId() {

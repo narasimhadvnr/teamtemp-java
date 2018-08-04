@@ -16,6 +16,7 @@ public class User {
 	
 	private String name;
 
+	
 	public long getId() {
 		return id;
 	}

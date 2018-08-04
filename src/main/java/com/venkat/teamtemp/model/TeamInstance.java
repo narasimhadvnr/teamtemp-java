@@ -8,7 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,10 +27,11 @@ public class TeamInstance {
 	private RatingLink linkValue;
 
 	@ManyToOne
+	@JsonIgnore
 	private Team team;
 	
-	@OneToMany
-	private List<InstanceRating> ratings;
+	@OneToMany(mappedBy="teamInstance")
+	public List<InstanceRating> ratings;
 	
 	public TeamInstance() {
 		

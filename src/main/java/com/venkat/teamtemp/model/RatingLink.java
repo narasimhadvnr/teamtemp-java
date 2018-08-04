@@ -3,11 +3,10 @@ package com.venkat.teamtemp.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Table;
+
 
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 
 @Entity
 public class RatingLink {
@@ -25,10 +24,6 @@ public class RatingLink {
 	
 	private String link;
 
-	@ManyToOne
-	@JoinColumn(name="teamId")
-	private TeamInstance teamInstance;
-	
 	public long getId() {
 		return id;
 	}
@@ -68,15 +63,5 @@ public class RatingLink {
 	public void setLink(String link) {
 		this.link = link;
 	}
-
-	public TeamInstance getTeamInstance() {
-		return teamInstance;
-	}
-
-	public void setTeamInstance(TeamInstance teamInstance) {
-		this.teamInstance = teamInstance;
-	}
-	
-	
 	
 }

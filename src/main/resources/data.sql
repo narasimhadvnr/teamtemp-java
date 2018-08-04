@@ -22,5 +22,5 @@ INSERT INTO `rating_link` (`id`,`link`, `status`, `valid_from`, `valid_till`, `t
 INSERT INTO `team_instance` (`id`,`link_id`, `team_id`) VALUES (3001, `5001`, 2001);
 INSERT INTO `team_instance` (`id`,`link_id`, `team_id`) VALUES (3001, `5002`, 2001);
 
-INSERT INTO `instance_rating` (`id`,`browser_id`, `rating`, `timestamp`, `word`, `team_link`) VALUES (6001, `andfjdser`, TRUE, 2342342342, 2342432234, 2001);
+INSERT INTO `instance_rating` (`id`,`browser_id`, `rating`, `timestamp`, `word`, `team_link`) VALUES (6001, `andfjdser`, 5, 2342342342, 'Nice', 5001);
 

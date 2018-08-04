@@ -2,12 +2,11 @@ package com.venkat.teamtemp.controller;
 
 import java.util.Date;
 import java.util.Optional;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,7 @@ import com.venkat.teamtemp.repository.TeamRepository;
 import com.venkat.teamtemp.util.RandomString;
 
 @RestController
-@RequestMapping("/team/")
+@RequestMapping("/teams/")
 public class TeamInstanceController {
 	
 	RandomString string;
@@ -61,15 +60,13 @@ public class TeamInstanceController {
 			
 			TeamInstance instance = new TeamInstance();
 			instance.setTeam(team.get());
-			repository.save(instance);
-			
+
 			RatingLink link = new RatingLink();
 			
 			link.setStatus("active");
 			link.setLink(string.nextString());
 			link.setValidFrom(new Date().getTime());
 			link.setValidTill(link.getValidFrom() + TWO_WEEKS);
-			link.setTeamInstance(instance);
 			
 			ratingLinkRepository.save(link);
 			
@@ -82,17 +79,42 @@ public class TeamInstanceController {
 		}
 	}
 	
-	@GetMapping("/{teamId}/link")
-	public boolean getRatingData( @PathVariable("teamId") long teamId ) {
+
+	@GetMapping("/instances")
+	public List<TeamInstance> getAllTeamInstances(){
+		return repository.findAll();
+	}
+
+
+
+	@GetMapping("/instances/{teamInstanceId}")
+	public TeamInstance getAllTeamInstances( @PathVariable("teamInstanceId") long id ){
+		Optional<TeamInstance>  teamInstance = repository.findById(id);
+		if(teamInstance.isPresent()){
+			return teamInstance.get();
+		}
+		return null;
+	}
+
+	@GetMapping("/{teamId}/link/{linkName}")
+	public TeamInstance getRatingData( @PathVariable("teamId") long teamId, @PathVariable("linkName") String linkId ) {
 		
 		Optional<Team> team = teamRepository.findById(teamId);
 		
 		if(team.isPresent()) {
 			Team item = team.get();
-			//TODO RETURN LINK DETAILS
-			return true;
-		}else {
-			return false;
+			
+			for(int i=0; i< item.getLinks().size(); i++){
+
+				RatingLink ratingLink = item.getLinks().get(i).getLinkValue();
+
+				if(ratingLink != null && ratingLink.getLink() == linkId)
+					return item.getLinks().get(i);
+			}
+			
 		}
+
+		return null;
+		
 	}
 }

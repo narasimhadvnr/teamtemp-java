@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.venkat.teamtemp.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
-	
+
+	User findByName(String name);
 }
