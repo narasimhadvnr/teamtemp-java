@@ -1,4 +1,4 @@
-package com.venkat.teamtemp.domain;
+package com.venkat.teamtemp.model;
 
 
 import javax.persistence.Entity;

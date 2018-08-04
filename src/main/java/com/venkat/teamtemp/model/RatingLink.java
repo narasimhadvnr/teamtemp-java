@@ -1,4 +1,4 @@
-package com.venkat.teamtemp.domain;
+package com.venkat.teamtemp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,9 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Rating {
+public class RatingLink {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,6 +25,10 @@ public class Rating {
 	
 	private String link;
 
+	@ManyToOne
+	@JoinColumn(name="teamId")
+	private TeamInstance teamInstance;
+	
 	public long getId() {
 		return id;
 	}
@@ -62,6 +68,15 @@ public class Rating {
 	public void setLink(String link) {
 		this.link = link;
 	}
+
+	public TeamInstance getTeamInstance() {
+		return teamInstance;
+	}
+
+	public void setTeamInstance(TeamInstance teamInstance) {
+		this.teamInstance = teamInstance;
+	}
+	
 	
 	
 }

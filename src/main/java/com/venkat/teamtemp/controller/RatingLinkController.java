@@ -1,7 +1,5 @@
 package com.venkat.teamtemp.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,28 +7,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.venkat.teamtemp.model.User;
-import com.venkat.teamtemp.repository.UserRepository;
+import com.venkat.teamtemp.model.RatingLink;
+import com.venkat.teamtemp.repository.RatingLinkRepository;
+import com.venkat.teamtemp.repository.TeamInstanceRepository;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/rating")
+public class RatingLinkController {
+
 	
 	@Autowired
-	private UserRepository repository;
-	
+	RatingLinkRepository repository;
 	
 	@PostMapping
-	public boolean addUser(@RequestBody User user) {
+	public boolean saveRating(@RequestBody RatingLink rating) {
 		
-		repository.save(user);
-		
+		repository.save(rating);
 		return true;
 	}
-
-
-	@GetMapping
-	public Iterable<User> getUsers() {
-		return repository.findAll();
-	}
+	
 }

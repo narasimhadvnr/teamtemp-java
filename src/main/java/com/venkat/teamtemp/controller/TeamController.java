@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.venkat.teamtemp.domain.Team;
-import com.venkat.teamtemp.domain.TeamInstance;
-import com.venkat.teamtemp.domain.User;
+import com.venkat.teamtemp.model.Team;
+import com.venkat.teamtemp.model.TeamInstance;
+import com.venkat.teamtemp.model.User;
 import com.venkat.teamtemp.repository.TeamRepository;
 
 @RestController
@@ -39,17 +39,5 @@ public class TeamController {
 		return repository.findAll();
 	}
 	
-	@PostMapping("/{teamId}/link")
-	public boolean createRatingLink(@RequestBody TeamInstance instance, @PathVariable("teamId") long teamId ) {
-		
-		Optional<Team> team = repository.findById(teamId);
-		
-		if(team.isPresent()) {
-			Team item = team.get();
-			repository.save(item);
-			return true;
-		}else {
-			return false;
-		}
-	}
+	
 }

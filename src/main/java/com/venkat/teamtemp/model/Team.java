@@ -1,8 +1,10 @@
-package com.venkat.teamtemp.domain;
+package com.venkat.teamtemp.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
@@ -18,6 +20,7 @@ public class Team {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	public long id;
 	
+	@Column(nullable=false)
 	private String name;
 	
 	private String roleType;
@@ -27,7 +30,7 @@ public class Team {
 	private User creatorUser;
 	
 	@OneToMany
-	@JoinColumn(name="link")
+	@JoinColumn(name="id")
 	private List<TeamInstance> links;
 
 	public long getId() {
