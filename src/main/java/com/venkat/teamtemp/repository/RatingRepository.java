@@ -8,5 +8,5 @@ import com.venkat.teamtemp.model.ThemeRating;
 
 public interface RatingRepository extends JpaRepository<ThemeRating, Long>, CustomRatingRepository{
 
-	List<ThemeRating> findByThemeId(long id);
+	ThemeRating findByThemeId(long id);
 }

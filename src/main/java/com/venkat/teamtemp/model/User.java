@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -16,6 +18,15 @@ public class User {
 	
 	private String name;
 
+	private String role;
+	
+	@JsonIgnore
+	private String password;
+	
+	@JsonIgnore
+	private String salt;
+	
+	
 	
 	public long getId() {
 		return id;
@@ -31,6 +42,30 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 	
 	

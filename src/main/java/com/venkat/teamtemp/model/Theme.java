@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Theme {
@@ -26,6 +27,8 @@ public class Theme {
 	private long validFrom;
 
 	private long validTill;
+	
+	private String description;
 
 	@Column(nullable = false, unique = true)
 	private String status;
@@ -109,4 +112,13 @@ public class Theme {
 		this.link = link;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	
 }

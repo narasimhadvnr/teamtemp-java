@@ -6,12 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 public class ThemeRating {
@@ -24,15 +21,20 @@ public class ThemeRating {
 	private int rating;
 	
 	@Column(nullable = false)
-	private String word;
+	private String comment;
 	
 	private long timestamp;
 	
 	private String browserId;
 	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String userName;
+	
 	@ManyToOne
 	private Theme theme;
 	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String location;
 	
 	public long getId() {
 		return id;
@@ -50,12 +52,20 @@ public class ThemeRating {
 		this.rating = rating;
 	}
 
-	public String getWord() {
-		return word;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setWord(String word) {
-		this.word = word;
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public long getTimestamp() {
