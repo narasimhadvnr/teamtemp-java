@@ -15,6 +15,7 @@ import com.venkat.teamtemp.model.Team;
 import com.venkat.teamtemp.model.Theme;
 import com.venkat.teamtemp.repository.ThemeRepository;
 import com.venkat.teamtemp.repository.TeamRepository;
+import com.venkat.teamtemp.util.AppConstants;
 import com.venkat.teamtemp.util.RandomString;
 
 @RestController
@@ -23,7 +24,6 @@ public class ThemeController {
 	
 	RandomString string;
 	
-	private final static long TWO_WEEKS = (1000 * 60*60 *24) * 14;
 	
 	@Autowired
 	private ThemeRepository repository;
@@ -56,7 +56,7 @@ public class ThemeController {
 			instance.setStatus("active");
 			instance.setLink(string.nextString());
 			instance.setValidFrom(new Date().getTime());
-			instance.setValidTill(instance.getValidFrom() + TWO_WEEKS);
+			instance.setValidTill(instance.getValidFrom() + AppConstants.TWO_WEEKS);
 			repository.save(instance);
 			
 			return instance.getLink();

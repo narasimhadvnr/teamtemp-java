@@ -10,5 +10,7 @@ public interface ThemeRepository extends JpaRepository<Theme, Long>{
 	Theme findByName(String name);
 
 	Theme findByLink(String name);
+	
+	Theme findByTeamIdAndName(long id, String name);
 
 }

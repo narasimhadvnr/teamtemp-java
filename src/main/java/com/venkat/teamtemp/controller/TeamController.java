@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.venkat.teamtemp.model.Team;
 import com.venkat.teamtemp.repository.TeamRepository;
+import com.venkat.teamtemp.util.APIError;
 
 @RestController
 @RequestMapping("/teams")
@@ -41,30 +42,30 @@ public class TeamController {
 	}
 	
 	@GetMapping("/{teamId}")
-	public ResponseEntity<Team> getUser( @PathVariable("teamId") long id){
+	public ResponseEntity<Object> getUser( @PathVariable("teamId") long id){
 		
 		Optional<Team> team = repository.findById(id);
 		
 		if(team.isPresent()) {
-			return new ResponseEntity(team.get(), HttpStatus.ACCEPTED);
+			return new ResponseEntity(team.get(), HttpStatus.OK);
 		}
 		
-		return new ResponseEntity(null,HttpStatus.ACCEPTED);
+		return new ResponseEntity(new APIError("No Team found with the id"),HttpStatus.NOT_FOUND);
 	}
 	
 	
 	@PostMapping("/{teamId}")
-	public ResponseEntity<String> editUser(@RequestBody Team teamData, @PathVariable("teamId") long id){
+	public ResponseEntity<Object> editUser(@RequestBody Team teamData, @PathVariable("teamId") long id){
 		
 		Optional<Team> team = repository.findById(id);
 		
 		if(team.isPresent()) {
 			team.get().setId(id);
 			repository.save(team.get());
-			return new ResponseEntity("success", HttpStatus.ACCEPTED);
+			return new ResponseEntity("success", HttpStatus.OK);
 		}
 		
-		return new ResponseEntity("Invalid teamID", HttpStatus.ACCEPTED);
+		return new ResponseEntity(new APIError("Invalid teamID"), HttpStatus.NOT_FOUND);
 	}
 	
 	
