@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
@@ -28,9 +29,10 @@ public class ThemeRating {
 	private String browserId;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String userName;
+	private String commentBy;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Theme theme;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -90,6 +92,14 @@ public class ThemeRating {
 
 	public void setTheme(Theme teamLink) {
 		this.theme = teamLink;
+	}
+
+	public String getCommentBy() {
+		return commentBy;
+	}
+
+	public void setCommentBy(String commentBy) {
+		this.commentBy = commentBy;
 	}
 	
 	

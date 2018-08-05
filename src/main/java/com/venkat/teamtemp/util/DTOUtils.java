@@ -1,19 +1,19 @@
 package com.venkat.teamtemp.util;
 
-import com.venkat.teamtemp.dto.RatingMetaData;
-import com.venkat.teamtemp.model.ThemeRating;
+import com.venkat.teamtemp.dto.ThemeMetaData;
+import com.venkat.teamtemp.model.Theme;
 
 public class DTOUtils {
 
-	public static RatingMetaData convertToDTO(ThemeRating rating) {
+	public static ThemeMetaData convertToThemeDTO(Theme theme) {
 		
 		
-		RatingMetaData dto = new RatingMetaData();
+		ThemeMetaData dto = new ThemeMetaData();
 		
-		dto.setTeamName(rating.getTheme().getTeam().getName());
-		dto.setTeamId(rating.getTheme().getTeam().getId());
-		dto.setThemeName(rating.getTheme().getName());
-		dto.setThemeDescription(rating.getTheme().getDescription());
+		dto.setTeamName(theme.getTeam().getName());
+		dto.setTeamId(theme.getTeam().getId());
+		dto.setThemeName(theme.getName());
+		dto.setThemeDescription(theme.getDescription());
 		
 		return dto;
 	}

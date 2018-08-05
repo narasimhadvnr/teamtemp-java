@@ -1,6 +1,6 @@
 package com.venkat.teamtemp.dto;
 
-public class RatingMetaData {
+public class ThemeMetaData {
 	
 	private String teamName;
 	

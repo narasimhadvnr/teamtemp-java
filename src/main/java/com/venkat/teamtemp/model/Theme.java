@@ -30,7 +30,7 @@ public class Theme {
 	
 	private String description;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String status;
 
 	@Column(nullable = false, unique = true)
