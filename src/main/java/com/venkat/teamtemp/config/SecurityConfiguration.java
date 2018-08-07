@@ -39,17 +39,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                csrf().disable().
-                sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
-                and().
-                authorizeRequests().antMatchers(HttpMethod.GET,"/comments/**","/users").permitAll()
-                .and().
-                authorizeRequests().
-                antMatchers("/teams/**","/home/**","/comments")
-                .hasRole("ADMIN").and().
-                exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint());
+//        http.
+//                csrf().disable().
+//                sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
+//                and().
+//                authorizeRequests().antMatchers(HttpMethod.GET,"/comments/**","/users").permitAll()
+//                .and().
+//                authorizeRequests().
+//                antMatchers("/teams/**","/home/**","/comments")
+//                .hasRole("ADMIN").and().
+//                exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint());
 
-    //    http.addFilterBefore(new AuthenticationFilter(authenticationManager()), BasicAuthenticationFilter.class).
+        http.addFilterBefore(new AuthenticationFilter(authenticationManager()), BasicAuthenticationFilter.class).
     }
 }
