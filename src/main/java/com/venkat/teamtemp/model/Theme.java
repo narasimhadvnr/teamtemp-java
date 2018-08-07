@@ -34,6 +34,9 @@ public class Theme {
 
 	@Column(nullable = false, unique = true)
 	private String link;
+	
+	@Column(nullable = false, unique = true)
+	private int accessCode;
 
 	@ManyToOne
 	@JsonIgnore
@@ -119,5 +122,12 @@ public class Theme {
 		this.description = description;
 	}
 
-	
+	public int getAccessCode() {
+		return accessCode;
+	}
+
+	public void setAccessCode(int accessCode) {
+		this.accessCode = accessCode;
+	}
+
 }

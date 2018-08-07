@@ -1,6 +1,5 @@
 package com.venkat.teamtemp.controller;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ import com.venkat.teamtemp.model.Theme;
 import com.venkat.teamtemp.repository.TeamRepository;
 import com.venkat.teamtemp.repository.ThemeRepository;
 import com.venkat.teamtemp.util.APIError;
-import com.venkat.teamtemp.util.AppConstants;
-import com.venkat.teamtemp.util.RandomString;
+import com.venkat.teamtemp.util.AppUtils;
+import com.venkat.teamtemp.util.RandomKey;
 
 @RestController
 @RequestMapping("/home")
@@ -34,8 +33,15 @@ public class HomeController {
 	@PostMapping
 	public ResponseEntity<Object> createTeamAndThemeUrl(@RequestBody ThemeMetaData metadata){
 		
-		RandomString string=new RandomString();
 		
+		if(metadata.getTeamName() == null || metadata.getThemeDescription() == null || metadata.getThemeName() ==null) {
+			
+			return new ResponseEntity(new APIError("TeamName & themeName & theme description is mandatory"),
+					HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		RandomKey key=new RandomKey();
 		
 		Team team = null;
 		
@@ -58,6 +64,7 @@ public class HomeController {
 			team = new Team();
 			team.setName(metadata.getTeamName());
 			teamRepository.save(team);
+			
 		}else {
 			
 			Theme theme = repository.findByTeamIdAndName(team.getId(), metadata.getThemeName());
@@ -65,20 +72,46 @@ public class HomeController {
 			if(theme!= null) {
 				return new ResponseEntity<Object> (new APIError("TeamId and theme already exists with link:"+ theme.getLink()), HttpStatus.OK);
 			}
-		}
+		}					
+	
+		String url = getUniqueUrl(key);
 		
-		Theme theme=new Theme();
-		theme.setDescription(metadata.getThemeDescription());
-		theme.setName(metadata.getThemeName());
-		theme.setTeam(team);			
-		theme.setStatus("active");
-		theme.setLink(string.nextString());
-		theme.setValidFrom(new Date().getTime());
-		theme.setValidTill(theme.getValidFrom() + AppConstants.TWO_WEEKS);
+		int accessCode = getUniqueLong(key);
+		
+		Theme theme = AppUtils.generateTheme(team, metadata, url, accessCode);
 		
 		repository.save(theme);
 		
 		return new ResponseEntity<Object>(theme,HttpStatus.OK);
 		
+	}
+	
+	
+	private int getUniqueLong(RandomKey key) {
+		
+		int randomAccessCode =-1;
+		boolean exit = true;		
+		while(exit) {
+			randomAccessCode= key.nextRandomInt();
+			Theme search= repository.findByAccessCode(randomAccessCode);
+			if(search==null)
+				exit = false;
+
+		}
+		return randomAccessCode;
+		
+	}
+	
+	private String getUniqueUrl(RandomKey key) {
+		String urlLink = null;
+		boolean exit = true;
+		while(exit) {
+			urlLink = key.nextString();
+			Theme search= repository.findByLink(urlLink);
+			if(search== null)
+				exit = false;
+
+		}
+		return urlLink;
 	}
 }

@@ -17,8 +17,8 @@ public class ThemeRating {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	
-	@Column(nullable = false)
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private int rating;
 	
 	@Column(nullable = false)
@@ -26,6 +26,7 @@ public class ThemeRating {
 	
 	private long timestamp;
 	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String browserId;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -37,6 +38,10 @@ public class ThemeRating {
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String location;
+	
+	public ThemeRating() {
+		
+	}
 	
 	public long getId() {
 		return id;

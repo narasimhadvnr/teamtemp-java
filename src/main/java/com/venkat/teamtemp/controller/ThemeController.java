@@ -16,13 +16,13 @@ import com.venkat.teamtemp.model.Theme;
 import com.venkat.teamtemp.repository.ThemeRepository;
 import com.venkat.teamtemp.repository.TeamRepository;
 import com.venkat.teamtemp.util.AppConstants;
-import com.venkat.teamtemp.util.RandomString;
+import com.venkat.teamtemp.util.RandomKey;
 
 @RestController
 @RequestMapping("/teams/{teamId}/themes")
 public class ThemeController {
 	
-	RandomString string;
+	RandomKey string;
 	
 	
 	@Autowired
@@ -34,7 +34,7 @@ public class ThemeController {
 	
 	public ThemeController() {
 		// TODO Auto-generated constructor stub
-		string = new RandomString(10);
+		string = new RandomKey(10);
 
 	}
 	
