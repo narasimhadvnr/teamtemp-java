@@ -1,6 +1,8 @@
 package com.venkat.teamtemp.model;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +42,7 @@ public class ThemeRating {
 	private String location;
 	
 	public ThemeRating() {
-		
+		this.timestamp = new Date().getTime();
 	}
 	
 	public long getId() {

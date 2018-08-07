@@ -26,6 +26,7 @@ public class UserController {
 	public boolean addUser(@RequestBody User user) {
 		
 		repository.save(user);
+		
 		return true;
 	}
 
