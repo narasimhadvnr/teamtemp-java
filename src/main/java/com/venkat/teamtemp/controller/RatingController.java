@@ -3,6 +3,7 @@ package com.venkat.teamtemp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,8 @@ public class RatingController {
 	
 	boolean linkFound = false;
 	
+	@Value("${enable.browser.id}")
+	boolean browserIdEnabled;
 	
 	@GetMapping
 	public ResponseEntity<Object> getAllData(){
@@ -50,20 +53,28 @@ public class RatingController {
 		List<Theme> instances = themeRepository.findAll();
 		linkFound = false;
 		System.out.println("instances found:"+instances.size());
-		instances.iterator().forEachRemaining(instance -> {
-			System.out.println(instance.getLink());
-			if(instance.getLink().equals(ratingLink)) {
+		
+		Theme instance = themeRepository.findByLink(ratingLink);
+
+		if(instance!=null) {
+
+			System.out.println("Browser id: "+rating.getBrowserId());
+				long id = instance.getId();
+				
+				if(browserIdEnabled && rating.getBrowserId() != null) {
+					
+					ThemeRating result = repository.findByBrowserIdAndThemeId(rating.getBrowserId(), id);
+					if(result!=null) {
+						rating.setId(result.getId());					
+					}
+				}
 				rating.setTheme(instance);
 				repository.save(rating);
-				linkFound = true;
-			}
-		});
-		
-		if(linkFound)
-			return true;
-		
+				return true;
+				
+		}
 		return false;
-		
+				
 	}
 	
 	@DeleteMapping("/{id}")

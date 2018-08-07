@@ -16,5 +16,7 @@ public interface RatingRepository extends PagingAndSortingRepository<ThemeRating
 	@Query( "select f from ThemeRating f where theme_id = :id" )
 	Page<ThemeRating> findByThemeAndPaging(long id, Pageable pageable);
 	
+	
+	ThemeRating findByBrowserIdAndThemeId(String browserId, long themeId);
 //	ThemeRating findByThemeId(long id);
 }

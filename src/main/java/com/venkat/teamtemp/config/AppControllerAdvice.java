@@ -1,5 +1,6 @@
 package com.venkat.teamtemp.config;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.venkat.teamtemp.util.APIError;
 
-@ControllerAdvice 
-@RequestMapping(value="/error",produces = "application/vnd.error+json") 
+@RequestMapping(produces = "application/vnd.error+json")
+@Profile("!dev")
 public class AppControllerAdvice {
 	
 
