@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.venkat.teamtemp.model.Team;
@@ -47,10 +46,10 @@ public class TeamController {
 		Optional<Team> team = repository.findById(id);
 		
 		if(team.isPresent()) {
-			return new ResponseEntity(team.get(), HttpStatus.OK);
+			return new ResponseEntity<Object>(team.get(), HttpStatus.OK);
 		}
 		
-		return new ResponseEntity(new APIError("No Team found with the id"),HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Object>(new APIError("No Team found with the id"),HttpStatus.NOT_FOUND);
 	}
 	
 	
@@ -62,10 +61,10 @@ public class TeamController {
 		if(team.isPresent()) {
 			team.get().setId(id);
 			repository.save(team.get());
-			return new ResponseEntity("success", HttpStatus.OK);
+			return new ResponseEntity<Object>("success", HttpStatus.OK);
 		}
 		
-		return new ResponseEntity(new APIError("Invalid teamID"), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Object>(new APIError("Invalid teamID"), HttpStatus.NOT_FOUND);
 	}
 	
 	
@@ -75,7 +74,7 @@ public class TeamController {
 		repository.deleteById(id);
 		
 		
-		return new ResponseEntity("success", HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
 	}
 	
 	

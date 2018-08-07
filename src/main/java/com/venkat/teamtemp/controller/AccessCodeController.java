@@ -27,9 +27,9 @@ public class AccessCodeController {
 		Theme theme = repository.findByAccessCode(code);
 		
 		if(theme != null) {
-			return new ResponseEntity("{ \"url\": \""+theme.getLink() +"\" }", HttpStatus.OK) ;
+			return new ResponseEntity<Object>("{ \"url\": \""+theme.getLink() +"\" }", HttpStatus.OK) ;
 		}
-		return new ResponseEntity(new APIError("No url found for this accessCode"), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Object>(new APIError("No url found for this accessCode"), HttpStatus.BAD_REQUEST);
 		
 	}
 	

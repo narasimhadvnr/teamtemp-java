@@ -36,7 +36,7 @@ public class HomeController {
 		
 		if(metadata.getTeamName() == null || metadata.getThemeDescription() == null || metadata.getThemeName() ==null) {
 			
-			return new ResponseEntity(new APIError("TeamName & themeName & theme description is mandatory"),
+			return new ResponseEntity<Object>(new APIError("TeamName & themeName & theme description is mandatory"),
 					HttpStatus.BAD_REQUEST);
 		}
 		

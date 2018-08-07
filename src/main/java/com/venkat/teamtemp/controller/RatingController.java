@@ -87,7 +87,7 @@ public class RatingController {
 			Page<ThemeRating> result= repository.findByThemeAndPaging(theme.getId(),
 					new PageRequest(page, pageSize));
 			
-			return new ResponseEntity(result,HttpStatus.OK);
+			return new ResponseEntity<Object>(result,HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<Object>(new APIError("NO data found"),HttpStatus.NO_CONTENT);
@@ -101,11 +101,11 @@ public class RatingController {
 		if(theme != null) {			
 				
 				ThemeMetaData dto = DTOUtils.convertToThemeDTO(theme);
-				return new ResponseEntity(dto, HttpStatus.OK);
+				return new ResponseEntity<Object>(dto, HttpStatus.OK);
 			
 		}
 		
-		return new ResponseEntity(new APIError("No Link found with this linkname"), HttpStatus.OK);
+		return new ResponseEntity<Object>(new APIError("No Link found with this linkname"), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{ratingLink}/all")
@@ -116,11 +116,11 @@ public class RatingController {
 		if(theme != null) {			
 				
 
-				return new ResponseEntity(theme.getRatings(), HttpStatus.OK);
+				return new ResponseEntity<Object>(theme.getRatings(), HttpStatus.OK);
 			
 		}
 		
-		return new ResponseEntity(new APIError("No Link found with this linkname"), HttpStatus.OK);
+		return new ResponseEntity<Object>(new APIError("No Link found with this linkname"), HttpStatus.OK);
 	}
 	
 }

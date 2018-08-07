@@ -9,6 +9,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class APIError implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 198928948928L;
+	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	List<Error> errors;
 
@@ -37,6 +42,11 @@ public class APIError implements Serializable{
 	
 	class Error implements Serializable{
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -2488988947653041168L;
+
 		@JsonInclude(JsonInclude.Include.NON_NULL)
 		String error;
 		

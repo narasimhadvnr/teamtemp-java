@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.venkat.teamtemp.model.ThemeRating;
 
-public interface RatingRepository extends PagingAndSortingRepository<ThemeRating, Long>, CustomRatingRepository{
+public interface RatingRepository extends PagingAndSortingRepository<ThemeRating, Long>{
 
 	List<ThemeRating> findByThemeId(long id);
 	

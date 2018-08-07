@@ -50,7 +50,7 @@ public class UserController {
 			return new ResponseEntity<>(result,HttpStatus.OK);
 		}
 		
-		return new ResponseEntity(new APIError("No users found with that name"), HttpStatus.OK);
+		return new ResponseEntity<Object>(new APIError("No users found with that name"), HttpStatus.OK);
 	}
 
 }
